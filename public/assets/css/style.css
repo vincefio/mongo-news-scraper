@@ -28,6 +28,7 @@ body {
   padding: 0;
   font-family: "Cormorant SC";
   box-shadow: 10px 5px 20px 2px lightslategrey;
+  padding-top: 50px;
 }
 
 .jumbotron .overlay {
@@ -42,12 +43,14 @@ body {
 }
 
 .jumbotron .background-image {
-  height: 100%;
-  background-image: url("../images/newspaper.jpg");
+  height: 40%;
+  background-image: url("../images/blabbermouth.jpg");
   background-size: cover;
+
 }
 
 .jumbotron .caption {
+  padding-top: 70px;
   position: absolute;
   top: 30%;
   width: 100%;
