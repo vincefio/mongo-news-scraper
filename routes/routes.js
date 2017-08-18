@@ -96,4 +96,25 @@ module.exports = function(router) {
 	    }
 	  });
 	})
+
+	//post route for saving a note to an article
+	app.post("/saved/notes/:id", function(req, res) {
+	  var newNote = new Note(req.body);
+	  console.log("new note" + newNote);
+	  newNote.save(function(error, doc) {
+	    if (error) {
+	      res.send(error);
+	    }
+	    else {
+	      Article.findOneAndUpdate({_id: req.params.id}, { $push: { "note": doc._id } }, { new: true }).exec(function(err, newdoc) {
+	        if (err) {
+	          res.send(err);
+	        }
+	        else {
+	          res.redirect("/saved");
+	        }
+	      });
+	    }
+	  });
+	});
 }
