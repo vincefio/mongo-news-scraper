@@ -1,1 +1,1 @@
-# mongo-news-scraper
+This application is designed to scrape articles from blabbermouth.net, a rock news outlet, and then populate the page with articles from a MongoDB database.  The user can save articles that they enjoy, and they can also add notes to their saved articles if they choose.
