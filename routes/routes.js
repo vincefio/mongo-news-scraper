@@ -24,14 +24,15 @@ module.exports = function(router) {
 
 	// This route renders the saved handledbars page
   router.get("/saved", function(req, res) {
-  	//  Article.find({saved: true}).populate("notes", 'body').exec(function(err, doc) {
-   //  if (err) {
-   //    res.send(err);
-   //  }
-   //  else {
-   //    res.render("saved", {saved: doc});
-   //  }
-  	// });
+  	// res.json('route hit')
+  	 Article.find({saved: true}).populate("notes", 'body').exec(function(err, doc) {
+    if (err) {
+      res.send(err);
+    }
+    else {
+      res.render("saved", {saved: doc});
+    }
+  	});
   });
 
   router.get('/scrape', function(req, res){
@@ -83,4 +84,16 @@ module.exports = function(router) {
 	    }
 	  });
 	});
+
+	//delete route for articles on the saved page
+	router.post("/delete/:id", function(req, res){
+		 Article.update({_id: req.params.id}, {$set: {saved: false}}, function(err, doc) {
+	    if (err) {
+	      res.send(err);
+	    }
+	    else {
+	      res.redirect("/saved");
+	    }
+	  });
+	})
 }
