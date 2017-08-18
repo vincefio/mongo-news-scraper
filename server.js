@@ -35,7 +35,16 @@ app.use(express.static("public"));
 app.use(router);
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/mongo-news-scraper");
+// mongoose.connect("mongodb://localhost/mongo-news-scraper");
+//define local mongoDB URI
+if(process.env.MONGODB_URI){
+	//THIS EXECUTES IF THIS IS IN HEROKU
+	mongoose.connect(process.env.MONGODB_URI);
+}else {
+	mongoose.connect("mongodb://localhost/mongo-news-scraper")
+}
+
+
 var db = mongoose.connection;
 
 // Set Handlebars.
