@@ -10,7 +10,9 @@ var Note = require('../models/Note')
 module.exports = function(router) {
 
 	router.get("/", function(req, res){
-		Article.find({}, function(err, doc) {
+		Article.find({
+			saved: false
+		}, function(err, doc) {
 		if (err) {
 			res.send(err);
 		}
