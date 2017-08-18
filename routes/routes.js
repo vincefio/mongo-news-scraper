@@ -117,4 +117,16 @@ module.exports = function(router) {
 	    }
 	  });
 	});
+
+	// delete route to delete a note
+	router.post("/saved/delete/:id", function(req, res) {
+	  Note.remove({_id: req.params.id}, function(err, doc){
+	    if (err) {
+	      res.send(err);
+	    }
+	    else {
+	      res.redirect("/saved");
+	    }
+	  });
+	});
 }
