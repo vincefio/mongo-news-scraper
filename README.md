@@ -1,4 +1,4 @@
-This application is designed to scrape news articles from blabbermouth.net, a rock music news outlet, and then populate the page with articles from a MongoDB database.  The user can save articles that they enjoy, and they can also add notes to their saved articles if they choose.
+This application is designed to scrape news articles from blabbermouth.net, a rock music news outlet, and then populate the page from a MongoDB database.  The user can save articles that they enjoy, and they can also add notes to their saved articles if they choose.
 
 The user first clicks the Scrape! button to scrape blabbermouth.net.  
 
