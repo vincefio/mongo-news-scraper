@@ -1,7 +1,9 @@
 //scraping tools
 var request = require("request");
 var cheerio = require("cheerio");
-
+var methodOverride = require("method-override");
+// Override with POST having ?_method=DELETE
+// app.use(methodOverride("_method"));
 var Article = require('../models/Article')
 
 
@@ -22,7 +24,14 @@ module.exports = function(router) {
 
 	// This route renders the saved handledbars page
   router.get("/saved", function(req, res) {
-    res.render("saved");
+  	//  Article.find({saved: true}).populate("notes", 'body').exec(function(err, doc) {
+   //  if (err) {
+   //    res.send(err);
+   //  }
+   //  else {
+   //    res.render("saved", {saved: doc});
+   //  }
+  	// });
   });
 
   router.get('/scrape', function(req, res){
@@ -62,10 +71,16 @@ module.exports = function(router) {
   res.redirect("/");
   })
 
-	
-
-
-
-
-
+  // put route to updated the article to be saved:true
+  router.post("/saved/:id", function(req, res) {
+		// res.redirect("/")
+	  Article.update({_id: req.params.id}, {$set: {saved: true}}, function(err, doc) {
+	    if (err) {
+	      res.send(err);
+	    }
+	    else {
+	      res.redirect("/");
+	    }
+	  });
+	});
 }

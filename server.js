@@ -8,6 +8,7 @@ var logger = require("morgan");
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 
+var methodOverride = require("method-override");
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
@@ -43,10 +44,15 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+// Override with POST having ?_method=DELETE
+app.use(methodOverride("_method"));
+
 // Once logged in to the db through mongoose, log a success message
 db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
+
+
 
 // Listen on port 3000
 app.listen(3000, function() {
