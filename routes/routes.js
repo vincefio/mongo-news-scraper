@@ -5,7 +5,7 @@ var methodOverride = require("method-override");
 // Override with POST having ?_method=DELETE
 // app.use(methodOverride("_method"));
 var Article = require('../models/Article')
-
+var Note = require('../models/Note')
 
 module.exports = function(router) {
 
@@ -98,7 +98,7 @@ module.exports = function(router) {
 	})
 
 	//post route for saving a note to an article
-	app.post("/saved/notes/:id", function(req, res) {
+	router.post("/saved/notes/:id", function(req, res) {
 	  var newNote = new Note(req.body);
 	  console.log("new note" + newNote);
 	  newNote.save(function(error, doc) {
@@ -106,7 +106,7 @@ module.exports = function(router) {
 	      res.send(error);
 	    }
 	    else {
-	      Article.findOneAndUpdate({_id: req.params.id}, { $push: { "note": doc._id } }, { new: true }).exec(function(err, newdoc) {
+	      Article.findOneAndUpdate({_id: req.params.id}, { $push: { "notes": doc._id } }, { new: true }).exec(function(err, newdoc) {
 	        if (err) {
 	          res.send(err);
 	        }
